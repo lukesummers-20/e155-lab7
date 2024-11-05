@@ -1,0 +1,551 @@
+m255
+K4
+z2
+!s11f vlog 2021.4 2021.10, Oct 14 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/lscc/radiant/3.2/modeltech/win32loem
+vaddRoundKey
+Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z1 !s110 1730310360
+!i10b 1
+!s100 jXM1UP`<hn[IQJe;G4XM;3
+IR]1Nk^^=FSQMKV[DXA@9o3
+S1
+Z2 dC:/Users/lsummers/Desktop/fpga
+w1730309265
+8C:/Users/lsummers/Desktop/fpga/src/addRoundKey.sv
+FC:/Users/lsummers/Desktop/fpga/src/addRoundKey.sv
+!i122 150
+L0 4 15
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+Z4 OT;L;2021.4;73
+r1
+!s85 0
+31
+Z5 !s108 1730310360.000000
+!s107 C:/Users/lsummers/Desktop/fpga/src/addRoundKey.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/addRoundKey.sv|
+!s101 -O0
+!i113 1
+Z6 o-work work -sv -O0
+Z7 tCvgOpt 0
+nadd@round@key
+vaddRoundKey_tb
+R0
+R1
+!i10b 1
+!s100 oXVa7gES6IzBm;7EPMnFH1
+I3Fn51cH<Q6h6@>d3@`2TO0
+S1
+R2
+w1730309206
+8C:/Users/lsummers/Desktop/fpga/sim/addRoundKey_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/addRoundKey_tb.sv
+!i122 158
+L0 3 20
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/sim/addRoundKey_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/addRoundKey_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nadd@round@key_tb
+vaes
+R0
+Z8 !s125 LATTICE_CONN
+R1
+!i10b 1
+!s100 L6acinb=hk1C<LjM@oR4V2
+IiXC7[DRH6XdH5hHThXk392
+S1
+R2
+Z9 w1730307267
+Z10 8C:/Users/lsummers/Desktop/fpga/src/aes_starter.sv
+Z11 FC:/Users/lsummers/Desktop/fpga/src/aes_starter.sv
+!i122 152
+L0 6 12
+R3
+R4
+r1
+!s85 0
+31
+R5
+Z12 !s107 C:/Users/lsummers/Desktop/fpga/src/aes_starter.sv|
+Z13 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/aes_starter.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+vaes_core
+R0
+R8
+R1
+!i10b 1
+!s100 Mi5jl[<HiN^m:>VJCH:gL2
+I6a5VbHP0_[h_ihM5CMCdY2
+S1
+R2
+R9
+R10
+R11
+!i122 152
+L0 40 10
+R3
+R4
+r1
+!s85 0
+31
+R5
+R12
+R13
+!s101 -O0
+!i113 1
+R6
+R7
+vaes_spi
+R0
+R1
+!i10b 1
+!s100 bY[YEoNQ0?^IE]]n?miZ12
+IkIl[^3OVjZlnFbf<eRXU30
+S1
+R2
+R9
+8C:/Users/lsummers/Desktop/fpga/src/aes_spi.sv
+FC:/Users/lsummers/Desktop/fpga/src/aes_spi.sv
+!i122 151
+L0 8 29
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/src/aes_spi.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/aes_spi.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+vgaloismult
+R0
+R1
+!i10b 1
+!s100 7zL68D;B88h6Mf3Oz44LN1
+IfZnYzmFNaC@[TWZiYcWzk2
+S1
+R2
+R9
+Z14 8C:/Users/lsummers/Desktop/fpga/src/mixColumns.sv
+Z15 FC:/Users/lsummers/Desktop/fpga/src/mixColumns.sv
+!i122 154
+L0 51 8
+R3
+R4
+r1
+!s85 0
+31
+R5
+Z16 !s107 C:/Users/lsummers/Desktop/fpga/src/mixColumns.sv|
+Z17 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/mixColumns.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+vkeyExpansion
+R0
+R1
+!i10b 1
+!s100 >NEfboAH48V`G4l1DQNOU3
+IHz[0WRV04Uc453lbbCoJ52
+S1
+R2
+Z18 w1730309699
+Z19 8C:/Users/lsummers/Desktop/fpga/src/keyExpansion.sv
+Z20 FC:/Users/lsummers/Desktop/fpga/src/keyExpansion.sv
+!i122 153
+L0 36 101
+R3
+R4
+r1
+!s85 0
+31
+R5
+Z21 !s107 C:/Users/lsummers/Desktop/fpga/src/keyExpansion.sv|
+Z22 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/keyExpansion.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nkey@expansion
+vkeyExpansion_tb
+R0
+!s110 1730310936
+!i10b 1
+!s100 Fo]@BIF[a5>mgOKz^Ln@m1
+I1YEPVP0J7f1ch0aEK7[1D2
+S1
+R2
+w1730310917
+8C:/Users/lsummers/Desktop/fpga/sim/keyExpansion_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/keyExpansion_tb.sv
+!i122 165
+L0 3 65
+R3
+R4
+r1
+!s85 0
+31
+!s108 1730310936.000000
+!s107 C:/Users/lsummers/Desktop/fpga/sim/keyExpansion_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/keyExpansion_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nkey@expansion_tb
+vmixcolumn
+R0
+R1
+!i10b 1
+!s100 kdLbPV]H>4G7lR^eaLM:b3
+I=]igR6O82>AZROOjF]N]@2
+S1
+R2
+R9
+R14
+R15
+!i122 154
+L0 24 19
+R3
+R4
+r1
+!s85 0
+31
+R5
+R16
+R17
+!s101 -O0
+!i113 1
+R6
+R7
+vmixcolumns
+R0
+R8
+R1
+!i10b 1
+!s100 8ocjmI>GhFSE^5Ob1`3B]0
+INEW_74YPcTAc_7ZQLHU:R1
+S1
+R2
+R9
+R14
+R15
+!i122 154
+L0 8 8
+R3
+R4
+r1
+!s85 0
+31
+R5
+R16
+R17
+!s101 -O0
+!i113 1
+R6
+R7
+vrotWord
+R0
+R1
+!i10b 1
+!s100 2dm:Z3zFRi?oSKEVL?hL]2
+IEdkQL^R:i0FSY;:zBAKfK1
+S1
+R2
+R18
+R19
+R20
+!i122 153
+L0 5 10
+R3
+R4
+r1
+!s85 0
+31
+R5
+R21
+R22
+!s101 -O0
+!i113 1
+R6
+R7
+nrot@word
+vsbox
+R0
+R1
+!i10b 1
+!s100 SR0nolL8z?9EgT<LT2h=U2
+I9ZzLC^8RQ_dRW2nMjX?7W2
+S1
+R2
+R9
+Z23 8C:/Users/lsummers/Desktop/fpga/src/sbox.sv
+Z24 FC:/Users/lsummers/Desktop/fpga/src/sbox.sv
+!i122 155
+L0 8 10
+R3
+R4
+r1
+!s85 0
+31
+R5
+Z25 !s107 C:/Users/lsummers/Desktop/fpga/src/sbox.sv|
+Z26 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/sbox.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+vsbox_sync
+R0
+R1
+!i10b 1
+!s100 j3Vn:C]OFEW4S1K5Cm01Z2
+IKEiOYFSTmYRG;h[BoJ8ba1
+S1
+R2
+R9
+R23
+R24
+!i122 155
+L0 25 16
+R3
+R4
+r1
+!s85 0
+31
+R5
+R25
+R26
+!s101 -O0
+!i113 1
+R6
+R7
+vshiftRows
+R0
+R1
+!i10b 1
+!s100 ^mlCaH=cikK?L9z7PCPn02
+IbJQnc<L:S0[;@Ag=132Oa0
+S1
+R2
+R9
+8C:/Users/lsummers/Desktop/fpga/src/shiftRows.sv
+FC:/Users/lsummers/Desktop/fpga/src/shiftRows.sv
+!i122 156
+L0 6 46
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/src/shiftRows.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/shiftRows.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nshift@rows
+vshiftRows_tb
+R0
+R1
+!i10b 1
+!s100 ?m;L2T=NoNCZ_a`<VS?]G2
+Ia_foWg<NUk[JfOSB:XIF80
+S1
+R2
+w1730307504
+8C:/Users/lsummers/Desktop/fpga/sim/shiftRows_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/shiftRows_tb.sv
+!i122 163
+L0 3 13
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/sim/shiftRows_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/shiftRows_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nshift@rows_tb
+vsubBytes
+R0
+R8
+R1
+!i10b 1
+!s100 o?>PdKe<gKXEJT24FfDeG1
+IQJ;eKTMHW4i8c:?W>?QHl3
+S1
+R2
+R9
+8C:/Users/lsummers/Desktop/fpga/src/subBytes.sv
+FC:/Users/lsummers/Desktop/fpga/src/subBytes.sv
+!i122 157
+L0 5 42
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/src/subBytes.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/src/subBytes.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nsub@bytes
+vsubBytes_tb
+R0
+R1
+!i10b 1
+!s100 G>EmMCjUH7A?cIaG4@DgT3
+Igi06LlU<?Y5>27>4ebkoS0
+S1
+R2
+w1730307557
+8C:/Users/lsummers/Desktop/fpga/sim/subBytes_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/subBytes_tb.sv
+!i122 164
+L0 3 19
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/sim/subBytes_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/subBytes_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+nsub@bytes_tb
+vsubWord
+R0
+R8
+R1
+!i10b 1
+!s100 Qni5m;XkK^kHOMP569]Vd1
+IaiO=cH1MV0<8`PZCfX=:50
+S1
+R2
+R18
+R19
+R20
+!i122 153
+L0 20 11
+R3
+R4
+r1
+!s85 0
+31
+R5
+R21
+R22
+!s101 -O0
+!i113 1
+R6
+R7
+nsub@word
+vtestbench_aes_core
+R0
+R1
+!i10b 1
+!s100 aD<7_IY:C]X`2c6i`[Pa<0
+Ial5PbMbi4Rfe_?8Z^fb2k3
+S1
+R2
+R9
+8C:/Users/lsummers/Desktop/fpga/sim/aes_core_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/aes_core_tb.sv
+!i122 159
+L0 11 42
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/sim/aes_core_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/aes_core_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+vtestbench_aes_sbox
+R0
+R1
+!i10b 1
+!s100 Nmef5zQfeg8YD40R?7AW03
+IcaNHeNBlFiCzANiOkOSkV3
+S1
+R2
+R9
+8C:/Users/lsummers/Desktop/fpga/sim/aes_sbox_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/aes_sbox_tb.sv
+!i122 160
+L0 7 67
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/sim/aes_sbox_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/aes_sbox_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
+vtestbench_aes_spi
+R0
+R1
+!i10b 1
+!s100 PcFFUBNWE;M`BnY_zj0Uj2
+IDVco06DFk?8Za?9Rml:Q?1
+S1
+R2
+R9
+8C:/Users/lsummers/Desktop/fpga/sim/aes_spi_tb.sv
+FC:/Users/lsummers/Desktop/fpga/sim/aes_spi_tb.sv
+!i122 161
+L0 8 73
+R3
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/lsummers/Desktop/fpga/sim/aes_spi_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/lsummers/Desktop/fpga/sim/aes_spi_tb.sv|
+!s101 -O0
+!i113 1
+R6
+R7
