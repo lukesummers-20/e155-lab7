@@ -59,7 +59,7 @@ module aes_core(input  logic         clk,
 endmodule
 
 module aes_datapath(
-    input  logic clk
+    input  logic clk,
     input  logic [3:0][31:0] w,
     input  logic [127:0] state,
     input  logic [1:0] addSel,
@@ -69,7 +69,7 @@ module aes_datapath(
     subBytes sub(clk, cipher, t1);
     shiftRows shift(t1, t2);
     mixcolumns mix(t2, t3);
-    mux3_128 (state, t2, t3, addSel, muxOut)
+    mux3_128 m(state, t2, t3, addSel, muxOut);
     addRoundKey add(muxOut, w, cipher);
 
 endmodule
@@ -77,9 +77,9 @@ endmodule
 module aes_controller(
     input  logic clk, load,
     input  logic [127:0] text, key,
-    output logic keySel, done
+    output logic keySel, done,
     output logic [1:0] addSel,
-    output logic [127:0] state,
+    output logic [127:0] stateInitial,
     output logic [3:0][31:0] wInitial,
     output logic [31:0] rCon
 );
@@ -96,7 +96,7 @@ module aes_controller(
     parameter s10 = 4'b1010;
     parameter s11 = 4'b1011;
 
-    logic [3:0] state, next
+    logic [3:0] state, next;
     //state reg
     always_ff @(posedge clk) begin
         state <= next;
@@ -126,13 +126,13 @@ module aes_controller(
     //output logic
     assign done = (state == s11);
     assign keySel = (state == s1);
-    assign state = text;
+    assign stateInitial = text;
     assign wInitial[0] = key[127:96];
     assign wInitial[1] = key[95:64];
     assign wInitial[2] = key[63:32];
     assign wInitial[3] = key[31:0];
     assign addSel[0] = (state == s11);
-    assign addSel[1] = !((state == s1) | (state == state == s11))
+    assign addSel[1] = !((state == s1) | (state == state == s11));
     always_comb
         case(state)
             s1: rCon = 32'h01000000;

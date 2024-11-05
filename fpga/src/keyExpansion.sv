@@ -36,8 +36,8 @@ module oneKeyExpansion(
     output logic [3:0][31:0] w
 );
   logic[31:0] wRot, wSub;
-  rotWord(oldW[3], wRot);
-  subWord(clk, wRot, wSub);
+  rotWord r(oldW[3], wRot);
+  subWord s(clk, wRot, wSub);
   assign w[0] = oldW[0] ^ (rCon ^ wSub);
   assign w[1] = oldW[1] ^ w[0];
   assign w[2] = oldW[2] ^ w[1];
