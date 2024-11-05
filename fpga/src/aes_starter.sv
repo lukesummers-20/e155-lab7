@@ -50,7 +50,7 @@ module aes_core(input  logic         clk,
     logic keySel;
     logic [1:0] addSel;
     logic [127:0] state;
-    aes_controller c(clk, load, text, key, keySel, done, addSel, state, wInit, rCon);
+    aes_controller c(clk, load, plaintext, key, keySel, done, addSel, state, wInit, rCon);
     aes_datapath d(clk, wMuxOut, state, addSel, cyphertext);
     oneKeyExpansion e(clk, expanIn, rCon, expanOut);
     mux2_4x31 mEx(expanOut, wInit, keySel, expanIn);
@@ -63,8 +63,14 @@ module aes_datapath(
     input  logic [3:0][31:0] w,
     input  logic [127:0] state,
     input  logic [1:0] addSel,
-    output logic [127:0] cipher
+    output logic [127:0] cipher,
+    output logic roundDone
 );
+    always_ff @(posedge clk) begin
+        if(load) roundDone <= 0;
+        else if (roundDone > 2) roundDone <= 0;
+        else roundDone <= roundDone + 1;
+    end
     logic [127:0] t1, t2, t3, muxOut;
     subBytes sub(clk, cipher, t1);
     shiftRows shift(t1, t2);
@@ -75,7 +81,7 @@ module aes_datapath(
 endmodule
 
 module aes_controller(
-    input  logic clk, load,
+    input  logic clk, load, roundDone
     input  logic [127:0] text, key,
     output logic keySel, done,
     output logic [1:0] addSel,
@@ -83,18 +89,18 @@ module aes_controller(
     output logic [3:0][31:0] wInitial,
     output logic [31:0] rCon
 );
-    parameter s0 = 4'b0000;
-    parameter s1 = 4'b0001;
-    parameter s2 = 4'b0010;
-    parameter s3 = 4'b0011;
-    parameter s4 = 4'b0100;
-    parameter s5 = 4'b0101;
-    parameter s6 = 4'b0110;
-    parameter s7 = 4'b0111;
-    parameter s8 = 4'b1000;
-    parameter s9 = 4'b1001;
-    parameter s10 = 4'b1010;
-    parameter s11 = 4'b1011;
+    parameter s0 = 5'b00000;
+    parameter s1 = 5'b00001;
+    parameter s2 = 5'b00010;
+    parameter s3 = 5'b00011;
+    parameter s4 = 5'b00100;
+    parameter s5 = 5'b00101;
+    parameter s6 = 5'b00110;
+    parameter s7 = 5'b00111;
+    parameter s8 = 5'b01000;
+    parameter s9 = 5'b01001;
+    parameter s10 = 5'b01010;
+    parameter s11 = 5'b01011;
 
     logic [3:0] state, next;
     //state reg
@@ -109,22 +115,100 @@ module aes_controller(
                     if(load) next = s1;
                     else next = s0;
                 end
-            s1: next = s2;
-            s2: next = s3;
-            s3: next = s4;
-            s4: next = s5;
-            s5: next = s6;
-            s6: next = s7;
-            s7: next = s8;
-            s8: next = s9;
-            s9: next = s10;
-            s10: next = s11;
-            s11: next = s0;
+            //r0
+            s1: begin 
+                    if(roundDone) next = s2;
+                    else next = s1;
+                end
+            r//1
+            s2: begin 
+                    if(roundDone) next = s3;
+                    else next = s2;
+                end
+            //r2
+            s3: begin 
+                    if(roundDone) next = s4;
+                    else next = s3;
+                end
+            //r3
+            s4: begin 
+                    if(roundDone) next = s5;
+                    else next = s4;
+                end
+            //r4
+            s5: begin 
+                    if(roundDone) next = s6;
+                    else next = s5;
+                end
+            //r5
+            s6: begin 
+                    if(roundDone) next = s7;
+                    else next = s6;
+                end
+            //r6
+            s7: begin 
+                    if(roundDone) next = s8;
+                    else next = s7;
+                end
+            //r7
+            s8: begin 
+                    if(roundDone) next = s9;
+                    else next = s8;
+                end
+            //r8
+            s9: begin 
+                    if(roundDone) next = s10;
+                    else next = s9;
+                end
+            //r9
+            s10: begin 
+                    if(roundDone) next = s11;
+                    else next = s10;
+                end
+            //r10
+            s11: begin 
+                    if(roundDone) next = s0;
+                    else next = s11;
+                end
+
+            //r0 waits
+            s12: next = s13;
+            s13: next = s2;
+            //r1 waits
+            s14: next = s15;
+            s15: next = s3;
+            //r2 waits
+            s16: next = s17;
+            s17: next = s4;
+            //r3 waits
+            s18: next = s19;
+            s19: next = s5;
+            //r4 waits
+            s20: next = s21;
+            s21: next = s6;
+            //r5 waits
+            s22: next = s23;
+            s23: next = s7;
+            //r6 waits
+            s24: next = s25;
+            s25: next = s8;
+            //r7 waits
+            s26: next = s27;
+            s27: next = s9;
+            //r8 waits
+            s28: next = s29;
+            s29: next = s10;
+            //r9 waits
+            s30: next = s31;
+            s31: next = s11;
+            //r10 waits
+            s32: next = s33;
+            s33: next = s0;
             default: next = s0;
         endcase
     
     //output logic
-    assign done = (state == s11);
+    assign done = ((state == s11) & (roundDone));
     assign keySel = (state == s1);
     assign stateInitial = text;
     assign wInitial[0] = key[127:96];
@@ -132,7 +216,7 @@ module aes_controller(
     assign wInitial[2] = key[63:32];
     assign wInitial[3] = key[31:0];
     assign addSel[0] = (state == s11);
-    assign addSel[1] = !((state == s1) | (state == state == s11));
+    assign addSel[1] = !((state == s1) | (state == s11));
     always_comb
         case(state)
             s1: rCon = 32'h01000000;
