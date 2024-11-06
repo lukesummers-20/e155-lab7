@@ -45,31 +45,41 @@ module aes_core(input  logic         clk,
                 output logic [127:0] cyphertext);
 
     // TODO: Your code goes here
-    logic [3:0][31:0] w, wInit, wMuxOut, expanIn, expanOut;
+    logic [3:0][31:0] w, wInit, wMuxOut, expanIn, expanOut, oldW;
     logic [31:0] rCon;
-    logic keySel;
+    logic keySel, roundDone;
     logic [1:0] addSel;
     logic [127:0] state;
-    aes_controller c(clk, load, plaintext, key, keySel, done, addSel, state, wInit, rCon);
-    aes_datapath d(clk, wMuxOut, state, addSel, cyphertext);
+    aes_controller c(clk, load, roundDone, plaintext, key, expanOut, keySel, done, addSel, state, wInit, oldW, rCon);
+    aes_datapath d(clk, load, wMuxOut, state, addSel, cyphertext, roundDone);
     oneKeyExpansion e(clk, expanIn, rCon, expanOut);
-    mux2_4x31 mEx(expanOut, wInit, keySel, expanIn);
+    mux2_4x31 mEx(oldW, wInit, keySel, expanIn);
     mux2_4x31 mW(expanOut, wInit, keySel, wMuxOut);
 
 endmodule
 
 module aes_datapath(
-    input  logic clk,
+    input  logic clk, load,
     input  logic [3:0][31:0] w,
     input  logic [127:0] state,
     input  logic [1:0] addSel,
     output logic [127:0] cipher,
     output logic roundDone
 );
+    logic [2:0] counter;
     always_ff @(posedge clk) begin
-        if(load) roundDone <= 0;
-        else if (roundDone > 2) roundDone <= 0;
-        else roundDone <= roundDone + 1;
+        if(load) begin
+			roundDone <= 0;
+			counter <= 0;
+		 end
+        else if (counter > 3) begin
+				roundDone <= 1;
+				counter <= 0;
+			      end
+        else begin
+		roundDone <= 0;
+		counter <= counter + 1;
+	     end
     end
     logic [127:0] t1, t2, t3, muxOut;
     subBytes sub(clk, cipher, t1);
@@ -81,12 +91,13 @@ module aes_datapath(
 endmodule
 
 module aes_controller(
-    input  logic clk, load, roundDone
+    input  logic clk, load, roundDone,
     input  logic [127:0] text, key,
+    input  logic [3:0][31:0] expandOut,
     output logic keySel, done,
     output logic [1:0] addSel,
     output logic [127:0] stateInitial,
-    output logic [3:0][31:0] wInitial,
+    output logic [3:0][31:0] wInitial, oldW,
     output logic [31:0] rCon
 );
     parameter s0 = 5'b00000;
@@ -106,6 +117,8 @@ module aes_controller(
     //state reg
     always_ff @(posedge clk) begin
         state <= next;
+	if (roundDone) oldW <= expandOut;
+	else oldW <= oldW;
     end
 
     //next state logic
@@ -120,7 +133,7 @@ module aes_controller(
                     if(roundDone) next = s2;
                     else next = s1;
                 end
-            r//1
+            //r1
             s2: begin 
                     if(roundDone) next = s3;
                     else next = s2;
@@ -170,7 +183,7 @@ module aes_controller(
                     if(roundDone) next = s0;
                     else next = s11;
                 end
-
+/*	
             //r0 waits
             s12: next = s13;
             s13: next = s2;
@@ -203,7 +216,7 @@ module aes_controller(
             s31: next = s11;
             //r10 waits
             s32: next = s33;
-            s33: next = s0;
+            s33: next = s0;*/
             default: next = s0;
         endcase
     
