@@ -45,6 +45,7 @@ module aes_core(input  logic         clk,
                 output logic [127:0] cyphertext);
 
     // TODO: Your code goes here
+    /*
     logic [3:0][31:0] w, wInit, wMuxOut, expanIn, expanOut, oldW;
     logic [31:0] rCon;
     logic keySel, roundDone;
@@ -54,10 +55,146 @@ module aes_core(input  logic         clk,
     aes_datapath d(clk, load, wMuxOut, state, addSel, cyphertext, roundDone);
     oneKeyExpansion e(clk, expanIn, rCon, expanOut);
     mux2_4x31 mEx(oldW, wInit, keySel, expanIn);
-    mux2_4x31 mW(expanOut, wInit, keySel, wMuxOut);
+    mux2_4x31 mW(expanOut, wInit, keySel, wMuxOut);*/
+
+	//logic [127:0] bSub, aSub, bShift, aShift, bMix, aMix, bAdd, aAdd;
+	logic [127:0] bSub, t1, t2, t3, t4, aAdd;
+	logic [3:0][31:0] w, wOld, wNew;
+	logic [31:0] rCon;
+
+	subBytes sub(clk, bSub, t1);
+	shiftRows shift(t1, t2);
+	mixcolumns mix(t2, t3);
+	addRoundKey add(t4, w, aAdd);
+
+	nextRoundKey expand(clk, wOld, rCon, wNew);
+
+	logic [3:0] round;
+	logic [2:0] cycles;
+	always_ff @(posedge clk) begin
+		if (load) begin
+			round <= 0;
+			cycles <= 0;
+			done <= 0;
+			keyExpanEn <= 0;
+		end else begin
+			if (round == 0) begin
+				if (cycles == 0) begin
+					w[3] <= key[127:96];
+					w[2] <= key[95:64];
+					w[1] <= key[63:32];
+					w[0] <= key[31:0];
+					wOld[3] <= key[127:96];
+					wOld[2] <= key[95:64];
+					wOld[1] <= key[63:32];
+					wOld[0] <= key[31:0];
+				end
+				t4 <= plaintext;
+
+/*
+				if (cycles == 0) begin
+					w[0] <= key[127:96];
+					w[1] <= key[95:64];
+					w[2] <= key[63:32];
+					w[3] <= key[31:0];
+					wOld[0] <= key[127:96];
+					wOld[1] <= key[95:64];
+					wOld[2] <= key[63:32];
+					wOld[3] <= key[31:0];
+				end
+				if (cycles == 1) begin
+					bAdd <= plaintext;
+				end
+*/
+			end
+			if ((round > 0) & (round < 10)) begin
+				if (cycles == 0) begin
+					w <= wNew;
+					wOld <= wNew;
+				end
+				bSub <= aAdd;
+				t4 <= t3;
+/*				
+				bShift <= aSub;
+				bMix <= aShift;
+				bAdd <= aMix;
+*/
+
+/*
+				if (cycles == 0) begin
+					bSub <= aAdd;
+					w <= wNew;
+					wOld <= wNew;
+				end
+				if (cycles == 2) begin
+					bShift <= aSub;
+				end
+				if (cycles == 3) begin
+					bMix <= aShift;
+				end
+				if (cycles == 4) begin
+					bAdd <= aMix;
+				end
+*/
+			end
+			if (round == 10) begin
+				if (cycles == 0) begin
+					w <= wNew;
+				end
+				bSub <= aAdd;
+				t4 <= t2;
+				if (cycles == 4) begin
+					cyphertext <= aAdd;
+					done <= 1;
+				end
+/*
+				bShift <= aSub;
+				bAdd <= aShift;
+*/
+
+/*
+				if (cycles == 0) begin
+					bSub <= aAdd;
+					w <= wNew;
+				end
+				if (cycles == 2) begin
+					bShift <= aSub;
+				end
+				if (cycles == 3) begin
+					bAdd <= aShift;
+				end
+				if (cycles == 4) begin
+					cyphertext <= aAdd;
+				end
+*/
+			end
+		
+
+			if (cycles > 3) begin
+				cycles <= 0;
+				round <= round + 1;
+			end else cycles <= cycles + 1;
+		end
+	end
+
+	always_comb
+        	case(round)
+            		0: rCon = 32'h01000000;
+            		1: rCon = 32'h02000000;
+            		2: rCon = 32'h04000000;
+            		3: rCon = 32'h08000000;
+            		4: rCon = 32'h10000000;
+            		5: rCon = 32'h20000000;
+            		6: rCon = 32'h40000000;
+            		7: rCon = 32'h80000000;
+            		8: rCon = 32'h1b000000;
+            		9: rCon = 32'h36000000;
+            		default: rCon = 32'h00000000;
+        	endcase
 
 endmodule
 
+/*
 module aes_datapath(
     input  logic clk, load,
     input  logic [3:0][31:0] w,
@@ -216,7 +353,7 @@ module aes_controller(
             s31: next = s11;
             //r10 waits
             s32: next = s33;
-            s33: next = s0;*/
+            s33: next = s0;
             default: next = s0;
         endcase
     
@@ -245,7 +382,7 @@ module aes_controller(
             default: rCon = 32'h00000000;
         endcase
 
-endmodule
+endmodule*/
 
 
 
