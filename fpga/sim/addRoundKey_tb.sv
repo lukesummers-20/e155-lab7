@@ -1,4 +1,5 @@
-
+//Luke Summers lsummers@g.hmc.edu
+//module for testing addRoundKey module
 
 module addRoundKey_tb();
     logic [127:0] state, newS, newExpec;

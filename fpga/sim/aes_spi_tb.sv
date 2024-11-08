@@ -1,3 +1,4 @@
+//given
 `timescale 10ns/1ns
 /////////////////////////////////////////////
 // testbench_aes_spi
@@ -15,7 +16,7 @@ module testbench_aes_spi();
     logic delay;
     
     // device under test
-    aes dut(clk, sck, sdi, sdo, load, done);
+    aes_sim dut(clk, sck, sdi, sdo, load, done);
     
     // test case
     initial begin   

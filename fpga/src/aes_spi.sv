@@ -1,3 +1,5 @@
+//part of starter code
+
 /////////////////////////////////////////////
 // aes_spi
 //   SPI interface.  Shifts in key and plaintext

@@ -1,4 +1,5 @@
-
+//Luke Summers lsummers@g.hmc.edu
+//module for testing subBytes module
 
 module subBytes_tb();
     logic clk;

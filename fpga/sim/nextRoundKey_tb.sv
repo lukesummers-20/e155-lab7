@@ -1,4 +1,5 @@
-
+//Luke Summers lsummers@g.hmc.edu
+//module for testing key expansion module
 
 module nextRoundKey_tb();
     logic clk;

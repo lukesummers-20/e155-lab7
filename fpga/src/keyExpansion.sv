@@ -1,6 +1,8 @@
+//Luke Summers lsummers@g.hmc.edu
+//submodules and modules for generating next round's keys
+
 //////////
 // rotword
-// 0 cycle
 /////////
 module rotWord(
   input  logic [31:0] word,
@@ -15,7 +17,6 @@ endmodule
 
 /////////
 // subword
-// one cycle
 /////////
 module subWord(
     input  logic clk,
@@ -29,6 +30,9 @@ module subWord(
 
 endmodule
 
+/////////
+// generates the next round's keys
+////////
 module nextRoundKey(
     input  logic clk,
     input  logic [3:0][31:0] oldW,

@@ -1,6 +1,8 @@
+//Luke Summers lsummers@g.hmc.edu
+//module for subBytes portion of AES algorithm
+
 //////////////////////////////////
 // sub bytes
-// one cycle
 //////////////////////////////////
 module subBytes(
   input logic clk,

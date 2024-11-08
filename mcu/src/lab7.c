@@ -9,7 +9,7 @@
 */
 #include <stdio.h>
 #include <stm32l432xx.h>
-#include "STM32L432KC.h"
+#include "../lib/STM32L432KC.h"
 
 ////////////////////////////////////////////////
 // Constants

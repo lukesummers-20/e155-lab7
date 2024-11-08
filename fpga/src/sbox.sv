@@ -1,3 +1,5 @@
+//given
+
 /////////////////////////////////////////////
 // sbox
 //   Infamous AES byte substitutions with magic numbers
